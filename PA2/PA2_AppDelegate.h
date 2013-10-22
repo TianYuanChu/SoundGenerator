@@ -11,5 +11,9 @@
 @interface PA2_AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSImageCell *imagView;
+@property (weak) IBOutlet NSTextField *picInfo;
 
+
+- (IBAction)Convert2Grey:(id)sender;
 @end
