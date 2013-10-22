@@ -11,13 +11,10 @@
 
 @implementation PA2_DragAndDropView
 
-NSString *kPrivateDragUTI = @"com.yourcompany.cocoadraganddrop";
+NSString *kPrivateDragUTI = @"dragdrop.token";
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-    /*------------------------------------------------------
-     Init method called for Interface Builder objects
-     --------------------------------------------------------*/
     self=[super initWithCoder:coder];
     if ( self ) {
         //register for all the image types we can display
@@ -46,28 +43,24 @@ NSString *kPrivateDragUTI = @"com.yourcompany.cocoadraganddrop";
         
         /* When an image from one window is dragged over another, we want to resize the dragging item to
          * preview the size of the image as it would appear if the user dropped it in. */
-        [sender enumerateDraggingItemsWithOptions:NSDraggingItemEnumerationConcurrent
-                                          forView:self
-                                          classes:[NSArray arrayWithObject:[NSPasteboardItem class]]
-                                    searchOptions:nil
-                                       usingBlock:^(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop) {
-                                           
-                                           /* Only resize a fragging item if it originated from one of our windows.  To do this,
-                                            * we declare a custom UTI that will only be assigned to dragging items we created.  Here
-                                            * we check if the dragging item can represent our custom UTI.  If it can't we stop. */
-                                           if ( ![[[draggingItem item] types] containsObject:kPrivateDragUTI] ) {
-                                               
-                                               *stop = YES;
-                                               
-                                           } else {
-                                               /* In order for the dragging item to actually resize, we have to reset its contents.
-                                                * The frame is going to be the destination view's bounds.  (Coordinates are local
-                                                * to the destination view here).
-                                                * For the contents, we'll grab the old contents and use those again.  If you wanted
-                                                * to perform other modifications in addition to the resize you could do that here. */
-                                               [draggingItem setDraggingFrame:self.bounds contents:[[[draggingItem imageComponents] objectAtIndex:0] contents]];
-                                           }
-                                       }];
+        [sender enumerateDraggingItemsWithOptions:NSDraggingItemEnumerationConcurrent forView:self classes:[NSArray arrayWithObject:[NSPasteboardItem class]] searchOptions:nil usingBlock:^(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop) {
+            
+            /* Only resize a fragging item if it originated from one of our windows.  To do this,
+             * we declare a custom UTI that will only be assigned to dragging items we created.  Here
+             * we check if the dragging item can represent our custom UTI.  If it can't we stop. */
+            if ( ![[[draggingItem item] types] containsObject:kPrivateDragUTI] ) {
+                
+                *stop = YES;
+                
+            } else {
+                /* In order for the dragging item to actually resize, we have to reset its contents.
+                 * The frame is going to be the destination view's bounds.  (Coordinates are local
+                 * to the destination view here).
+                 * For the contents, we'll grab the old contents and use those again.  If you wanted
+                 * to perform other modifications in addition to the resize you could do that here. */
+                [draggingItem setDraggingFrame:self.bounds contents:[[[draggingItem imageComponents] objectAtIndex:0] contents]];
+            }
+        }];
         
         //accept data as a copy operation
         return NSDragOperationCopy;

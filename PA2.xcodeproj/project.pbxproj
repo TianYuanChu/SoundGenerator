@@ -19,6 +19,7 @@
 		F8401297180E44E300E8BF60 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F8401295180E44E300E8BF60 /* InfoPlist.strings */; };
 		F8401299180E44E300E8BF60 /* PA2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F8401298180E44E300E8BF60 /* PA2Tests.m */; };
 		F84012A5180E474A00E8BF60 /* PA2_DragAndDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = F84012A4180E474A00E8BF60 /* PA2_DragAndDropView.m */; };
+		F8459D7D1816DB5A00DF204C /* PA2_ImageGrayConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = F8459D7C1816DB5A00DF204C /* PA2_ImageGrayConvert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		F8401298180E44E300E8BF60 /* PA2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PA2Tests.m; sourceTree = "<group>"; };
 		F84012A3180E474A00E8BF60 /* PA2_DragAndDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PA2_DragAndDropView.h; sourceTree = "<group>"; };
 		F84012A4180E474A00E8BF60 /* PA2_DragAndDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PA2_DragAndDropView.m; sourceTree = "<group>"; };
+		F8459D7B1816DB5A00DF204C /* PA2_ImageGrayConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PA2_ImageGrayConvert.h; sourceTree = "<group>"; };
+		F8459D7C1816DB5A00DF204C /* PA2_ImageGrayConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PA2_ImageGrayConvert.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,8 @@
 				F8401280180E44E200E8BF60 /* PA2_AppDelegate.h */,
 				F8401281180E44E200E8BF60 /* PA2_AppDelegate.m */,
 				F8401283180E44E200E8BF60 /* MainMenu.xib */,
+				F8459D7B1816DB5A00DF204C /* PA2_ImageGrayConvert.h */,
+				F8459D7C1816DB5A00DF204C /* PA2_ImageGrayConvert.m */,
 				F8401286180E44E200E8BF60 /* Images.xcassets */,
 				F8401275180E44E200E8BF60 /* Supporting Files */,
 			);
@@ -268,6 +273,7 @@
 			files = (
 				F8401282180E44E200E8BF60 /* PA2_AppDelegate.m in Sources */,
 				F840127B180E44E200E8BF60 /* main.m in Sources */,
+				F8459D7D1816DB5A00DF204C /* PA2_ImageGrayConvert.m in Sources */,
 				F84012A5180E474A00E8BF60 /* PA2_DragAndDropView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +485,7 @@
 				F840129E180E44E300E8BF60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F840129F180E44E300E8BF60 /* Build configuration list for PBXNativeTarget "PA2Tests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +494,7 @@
 				F84012A1180E44E300E8BF60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
