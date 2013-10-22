@@ -11,6 +11,7 @@
 @interface PA2_AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+
 @property (weak) IBOutlet NSImageCell *imageView;
 @property (weak) IBOutlet NSTextField *picInfo;
 @property (weak) IBOutlet NSButtonCell *convertGrayBtn;
@@ -18,4 +19,6 @@
 
 - (IBAction)Convert2Gray:(id)sender;
 - (IBAction)openFolder:(id)sender;
+
+
 @end

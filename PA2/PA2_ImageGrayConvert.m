@@ -12,8 +12,10 @@
 @implementation PA2_ImageGrayConvert
 
 + (NSImage*)grayscale:(NSImage*)colorImage {
+
     //NTSC standard
     const double conversionWeights[3]={.299, .587, .114};
+
     NSArray* currentReps=[colorImage representations];
     NSData* tiffData=[NSBitmapImageRep TIFFRepresentationOfImageRepsInArray:currentReps
                                                            usingCompression:NSTIFFCompressionNone
@@ -28,9 +30,11 @@
     const BOOL hasAlpha=[bitmap hasAlpha];
     const long samples=[bitmap samplesPerPixel];
     NSBitmapImageRep* grayBitmap=[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:nil pixelsWide:[bitmap pixelsWide] pixelsHigh:[bitmap pixelsHigh] bitsPerSample:8 samplesPerPixel: hasAlpha ? 2 : 1 hasAlpha: hasAlpha isPlanar:YES colorSpaceName:NSCalibratedWhiteColorSpace bytesPerRow:0 bitsPerPixel:0];
+
     
 
     if (! grayBitmap) return nil;
+
 
     unsigned char* destDataPlanes[2];
     [grayBitmap getBitmapDataPlanes:destDataPlanes];
@@ -98,10 +102,12 @@
             }
         }
     }
+
     //quick hack/fix on autorelease issue
     NSBitmapImageRep* grayBitmapBak=[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:nil pixelsWide:[bitmap pixelsWide] pixelsHigh:[bitmap pixelsHigh] bitsPerSample:8 samplesPerPixel: hasAlpha ? 2 : 1 hasAlpha: hasAlpha isPlanar:YES colorSpaceName:NSCalibratedWhiteColorSpace bytesPerRow:0 bitsPerPixel:0];
     NSImage* newImage=[[NSImage alloc] initWithSize:[colorImage size]];
     [newImage addRepresentation:grayBitmapBak];
+
     return newImage;
 }
 
