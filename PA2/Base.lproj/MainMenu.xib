@@ -734,12 +734,15 @@
                                             </textFieldCell>
                                         </textField>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ou-5l-LIq">
-                                            <rect key="frame" x="213" y="10" width="186" height="32"/>
+                                            <rect key="frame" x="213" y="12" width="186" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="L3J-FG-xL2">
+                                            <buttonCell key="cell" type="push" title="Generate Sound..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="L3J-FG-xL2">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
+                                            <connections>
+                                                <action selector="GenerateSound:" target="494" id="AbY-o9-tY3"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </view>
@@ -771,6 +774,7 @@
                 <outlet property="convertGrayBtn" destination="Jux-1a-mTF" id="Jgb-aW-8F1"/>
                 <outlet property="downSampleBtn" destination="5Mn-XT-xfO" id="Abh-Ba-r3D"/>
                 <outlet property="dragAndDropView" destination="725-sE-FlD" id="cEp-7V-s5R"/>
+                <outlet property="generateSoundBtn" destination="0Ou-5l-LIq" id="hWC-eD-bRl"/>
                 <outlet property="imageView" destination="jbf-nG-hHE" id="jCq-3n-QF7"/>
                 <outlet property="picInfo" destination="99A-73-f29" id="ydG-Bm-iUe"/>
                 <outlet property="window" destination="371" id="532"/>

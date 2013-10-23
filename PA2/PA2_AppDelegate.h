@@ -16,11 +16,13 @@
 @property (weak) IBOutlet NSTextField *picInfo;
 @property (weak) IBOutlet NSButtonCell *convertGrayBtn;
 @property (weak) IBOutlet NSButton *downSampleBtn;
+@property (weak) IBOutlet NSButton *generateSoundBtn;
 
 
 - (IBAction)Convert2Gray:(id)sender;
 - (IBAction)OpenFolder:(id)sender;
 - (IBAction)DownSample:(id)sender;
+- (IBAction)GenerateSound:(id)sender;
 
 
 @end

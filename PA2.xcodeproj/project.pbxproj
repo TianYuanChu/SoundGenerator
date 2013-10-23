@@ -22,6 +22,9 @@
 		F8459D7D1816DB5A00DF204C /* PA2_ImageGrayConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = F8459D7C1816DB5A00DF204C /* PA2_ImageGrayConvert.m */; };
 		F8459D81181752F200DF204C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8459D7E181741EB00DF204C /* Quartz.framework */; };
 		F8459D84181781F700DF204C /* PA2_ImageDownSample.m in Sources */ = {isa = PBXBuildFile; fileRef = F8459D83181781F700DF204C /* PA2_ImageDownSample.m */; };
+		F8459D881817941300DF204C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8459D871817941300DF204C /* AudioToolbox.framework */; };
+		F8459D8B1817943100DF204C /* PA2_ToneGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F8459D8A1817943100DF204C /* PA2_ToneGenerator.m */; };
+		F8459D8D1817A36400DF204C /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8459D8C1817A36400DF204C /* AudioUnit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,10 @@
 		F8459D7E181741EB00DF204C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		F8459D82181781F700DF204C /* PA2_ImageDownSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PA2_ImageDownSample.h; sourceTree = "<group>"; };
 		F8459D83181781F700DF204C /* PA2_ImageDownSample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PA2_ImageDownSample.m; sourceTree = "<group>"; };
+		F8459D871817941300DF204C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F8459D891817943100DF204C /* PA2_ToneGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PA2_ToneGenerator.h; sourceTree = "<group>"; };
+		F8459D8A1817943100DF204C /* PA2_ToneGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PA2_ToneGenerator.m; sourceTree = "<group>"; };
+		F8459D8C1817A36400DF204C /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8459D8D1817A36400DF204C /* AudioUnit.framework in Frameworks */,
+				F8459D881817941300DF204C /* AudioToolbox.framework in Frameworks */,
 				F8459D81181752F200DF204C /* Quartz.framework in Frameworks */,
 				F840126F180E44E200E8BF60 /* Cocoa.framework in Frameworks */,
 			);
@@ -107,6 +116,8 @@
 		F840126D180E44E200E8BF60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8459D8C1817A36400DF204C /* AudioUnit.framework */,
+				F8459D871817941300DF204C /* AudioToolbox.framework */,
 				F8459D7E181741EB00DF204C /* Quartz.framework */,
 				F840126E180E44E200E8BF60 /* Cocoa.framework */,
 				F840128D180E44E300E8BF60 /* XCTest.framework */,
@@ -133,6 +144,8 @@
 				F8401281180E44E200E8BF60 /* PA2_AppDelegate.m */,
 				F8401283180E44E200E8BF60 /* MainMenu.xib */,
 				F8459D7B1816DB5A00DF204C /* PA2_ImageGrayConvert.h */,
+				F8459D891817943100DF204C /* PA2_ToneGenerator.h */,
+				F8459D8A1817943100DF204C /* PA2_ToneGenerator.m */,
 				F8459D7C1816DB5A00DF204C /* PA2_ImageGrayConvert.m */,
 				F8459D82181781F700DF204C /* PA2_ImageDownSample.h */,
 				F8459D83181781F700DF204C /* PA2_ImageDownSample.m */,
@@ -283,6 +296,7 @@
 				F8401282180E44E200E8BF60 /* PA2_AppDelegate.m in Sources */,
 				F840127B180E44E200E8BF60 /* main.m in Sources */,
 				F8459D84181781F700DF204C /* PA2_ImageDownSample.m in Sources */,
+				F8459D8B1817943100DF204C /* PA2_ToneGenerator.m in Sources */,
 				F8459D7D1816DB5A00DF204C /* PA2_ImageGrayConvert.m in Sources */,
 				F84012A5180E474A00E8BF60 /* PA2_DragAndDropView.m in Sources */,
 			);
