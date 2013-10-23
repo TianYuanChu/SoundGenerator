@@ -15,10 +15,12 @@
 @property (weak) IBOutlet NSImageCell *imageView;
 @property (weak) IBOutlet NSTextField *picInfo;
 @property (weak) IBOutlet NSButtonCell *convertGrayBtn;
+@property (weak) IBOutlet NSButton *downSampleBtn;
 
 
 - (IBAction)Convert2Gray:(id)sender;
-- (IBAction)openFolder:(id)sender;
+- (IBAction)OpenFolder:(id)sender;
+- (IBAction)DownSample:(id)sender;
 
 
 @end

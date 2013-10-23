@@ -67,7 +67,7 @@
                                       initWithBitmapDataPlanes:NULL
                                       pixelsWide:w
                                       pixelsHigh:h
-                                      bitsPerSample:8
+                                      bitsPerSample:4
                                       samplesPerPixel:hasAlpha ? 2 : 1
                                       hasAlpha: hasAlpha
                                       isPlanar:NO
