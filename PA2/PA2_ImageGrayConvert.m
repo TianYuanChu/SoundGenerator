@@ -11,104 +11,85 @@
 
 @implementation PA2_ImageGrayConvert
 
-+ (NSImage*)grayscale:(NSImage*)colorImage {
-
-    //NTSC standard
-    const double conversionWeights[3]={.299, .587, .114};
-
-    NSArray* currentReps=[colorImage representations];
-    NSData* tiffData=[NSBitmapImageRep TIFFRepresentationOfImageRepsInArray:currentReps
-                                                           usingCompression:NSTIFFCompressionNone
-                                                                     factor:0.0];
-    NSBitmapImageRep* bitmap=[NSBitmapImageRep imageRepWithData:tiffData];
-    //we don't know how to handle anything but CHAR_BIT bits per sample
-    NSAssert1([bitmap bitsPerSample]==CHAR_BIT, @"bitsPerSample is %ld in grayscale method", [bitmap bitsPerSample]);
-    unsigned char* planes[5];
-    [bitmap getBitmapDataPlanes:planes];
-    int numberPlanes=0;
-    while (numberPlanes < 5 && planes[numberPlanes]) numberPlanes++;
-    const BOOL hasAlpha=[bitmap hasAlpha];
-    const long samples=[bitmap samplesPerPixel];
-    NSBitmapImageRep* grayBitmap=[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:nil pixelsWide:[bitmap pixelsWide] pixelsHigh:[bitmap pixelsHigh] bitsPerSample:8 samplesPerPixel: hasAlpha ? 2 : 1 hasAlpha: hasAlpha isPlanar:YES colorSpaceName:NSCalibratedWhiteColorSpace bytesPerRow:0 bitsPerPixel:0];
-
++ (NSImage *)Color2GrayScaleConvert:(NSImage *)srcImage
+{
+    NSBitmapImageRep *srcImageRep = [NSBitmapImageRep
+                                     imageRepWithData:[srcImage TIFFRepresentation]];
+    NSImage *destImage = [[NSImage alloc] initWithSize:[srcImage size]];
     
-
-    if (! grayBitmap) return nil;
-
-
-    unsigned char* destDataPlanes[2];
-    [grayBitmap getBitmapDataPlanes:destDataPlanes];
-    unsigned char* grayData=destDataPlanes[0];
-    unsigned char* alphaData=destDataPlanes[1];
-    if (! [bitmap isPlanar]) {
-        long height, maxHeight=[bitmap pixelsHigh], bytesPerRow=[bitmap bytesPerRow], rowLength=[bitmap pixelsWide]*samples;
-        unsigned char* writer=grayData;
-        unsigned char* alpha=alphaData;
-        for (height=0; height<maxHeight; height++) {
-            unsigned char* start=planes[0]+height*bytesPerRow;
-            unsigned char* pos=start;
-            while (pos-start < rowLength) {
-                long sampleCounter=samples;
-                double average=0;
-                if (sampleCounter==3 || (sampleCounter==4 && hasAlpha)) {
-                    average+=conversionWeights[0]**pos++;
-                    average+=conversionWeights[1]**pos++;
-                    average+=conversionWeights[2]**pos++;
-                    if (hasAlpha) *alpha++=*pos++;
-                    *writer++=(unsigned char)average;
-                }
-                else {
-                    if (hasAlpha) {
-                        while (--sampleCounter) average+=*pos++;
-                        *writer++=(unsigned char)(average/(samples-1));
-                        *alpha++=*pos++;
-                    }
-                    else {
-                        while (sampleCounter--) average+=*pos++;
-                        *writer++=(unsigned char)(average/samples);
-                    }
-                }
-            }
+    NSInteger w = [srcImageRep pixelsWide];
+    NSInteger h = [srcImageRep pixelsHigh];
+    long x, y;
+    const BOOL hasAlpha=[srcImageRep hasAlpha];
+    
+    NSBitmapImageRep *destImageRep = [[NSBitmapImageRep alloc]
+                                       initWithBitmapDataPlanes:NULL
+                                       pixelsWide:w
+                                       pixelsHigh:h
+                                       bitsPerSample:8
+                                       samplesPerPixel:hasAlpha ? 2 : 1
+                                       hasAlpha: hasAlpha
+                                       isPlanar:NO
+                                       colorSpaceName:NSCalibratedWhiteColorSpace
+                                       bytesPerRow:0
+                                       bitsPerPixel:0];
+    
+    unsigned char *srcData = [srcImageRep bitmapData];
+    unsigned char *destData = [destImageRep bitmapData];
+    unsigned char *p1, *p2;
+    NSInteger n = [srcImageRep bitsPerPixel] / 8;
+    
+    int height = [srcImage size].height;
+    int width = [srcImage size].width;
+    
+    for ( y = 0; y < height; y++ ) {
+        for ( x = 0; x < width; x++ ) {
+            p1 = srcData + n * (y * w + x);
+            p2 = destData + y * w + x;
+            //NTSC std: .299, .587, .114
+            p2[0] = (unsigned char)rint(0.299*p1[0] + 0.587*p1[1] + 0.114*p1[2]);
         }
     }
-    else { //bitmap is planar
-        long height, maxHeight=[bitmap pixelsHigh], bytesPerRow=[bitmap bytesPerRow], rowLength=[bitmap pixelsWide]*samples;
-        unsigned char* writer=grayData;
-        unsigned char* alpha=alphaData;
-        for (height=0; height<maxHeight; height++) {
-            long offset=height*bytesPerRow;
-            int i;
-            for (i=0; i<rowLength; i++) {
-                long sampleCounter=samples;
-                double average=0;
-                if (sampleCounter==3 || (sampleCounter==4 && hasAlpha)) {
-                    average+=conversionWeights[0]*planes[0][i+offset];
-                    average+=conversionWeights[1]*planes[1][i+offset];
-                    average+=conversionWeights[2]*planes[2][i+offset];
-                    if (hasAlpha) *alpha++=planes[3][i+offset];
-                    *writer++=(unsigned char)average;
-                }
-                else {
-                    if (hasAlpha) {
-                        *alpha++=planes[--sampleCounter][i+offset];
-                        while (sampleCounter--) average+=planes[sampleCounter][i+offset];
-                        *writer++=(unsigned char)(average/(samples-1));
-                    }
-                    else {
-                        while (sampleCounter--) average+=planes[sampleCounter][i+offset];
-                        *writer++=(unsigned char)(average/samples);
-                    }
-                }
-            }
-        }
-    }
-
-    //quick hack/fix on autorelease issue
-    NSBitmapImageRep* grayBitmapBak=[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:nil pixelsWide:[bitmap pixelsWide] pixelsHigh:[bitmap pixelsHigh] bitsPerSample:8 samplesPerPixel: hasAlpha ? 2 : 1 hasAlpha: hasAlpha isPlanar:YES colorSpaceName:NSCalibratedWhiteColorSpace bytesPerRow:0 bitsPerPixel:0];
-    NSImage* newImage=[[NSImage alloc] initWithSize:[colorImage size]];
-    [newImage addRepresentation:grayBitmapBak];
-
-    return newImage;
+    
+    [destImage addRepresentation:destImageRep];
+    return destImage;
 }
 
++ (NSImage *)Color2GrayScaleWithCustomeFilter:(NSImage *)srcImage
+{
+    NSBitmapImageRep *srcImageRep = [NSBitmapImageRep
+                                     imageRepWithData:[srcImage TIFFRepresentation]];
+    NSInteger w = [srcImageRep pixelsWide];
+    NSInteger h = [srcImageRep pixelsHigh];
+    const BOOL hasAlpha=[srcImageRep hasAlpha];
+    
+    NSBitmapImageRep *destImageRep = [[NSBitmapImageRep alloc]
+                                      initWithBitmapDataPlanes:NULL
+                                      pixelsWide:w
+                                      pixelsHigh:h
+                                      bitsPerSample:8
+                                      samplesPerPixel:hasAlpha ? 2 : 1
+                                      hasAlpha: hasAlpha
+                                      isPlanar:NO
+                                      colorSpaceName:NSCalibratedWhiteColorSpace
+                                      bytesPerRow:0
+                                      bitsPerPixel:0];
+    //NSImage to CIImage
+    CIFilter *monochromeFilter = [CIFilter filterWithName:@"CIColorMonochrome"];
+    [monochromeFilter setDefaults];
+    [monochromeFilter setValue:[CIImage imageWithData:[srcImage TIFFRepresentation]] forKey:@"inputImage"];
+    [monochromeFilter setValue:[CIColor colorWithRed:0 green:0 blue:0 alpha:0.5] forKey:@"inputColor"];
+    [monochromeFilter setValue:[NSNumber numberWithFloat:1] forKey:@"inputIntensity"];
+    
+    CIImage *output = (CIImage *)[monochromeFilter valueForKey:kCIOutputImageKey];
+    
+    //CIImage to NSImagea
+    CIContext *context = [CIContext contextWithCGContext:nil options:nil];
+    CGImageRef cgiimage = [context createCGImage:output fromRect:[output extent]];
+    NSImage* newImage = [[NSImage alloc] initWithCGImage:cgiimage size:[srcImage size]];
+    
+    CGImageRelease(cgiimage);
+    [newImage addRepresentation:destImageRep];
+    return newImage;
+}
 @end

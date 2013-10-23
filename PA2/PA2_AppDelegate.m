@@ -26,17 +26,15 @@
     else
     {
         NSImage *loadedImage = [imageView image];
-        NSImage *newImage = [PA2_ImageGrayConvert grayscale:loadedImage];
-
-        
-        NSBitmapImageRep *imgRep = [[newImage representations] objectAtIndex: 0];
-        NSData *data = [imgRep representationUsingType: NSPNGFileType properties: nil];
+        NSImage *newImage = [PA2_ImageGrayConvert Color2GrayScaleWithCustomeFilter:loadedImage];
+               
+        NSData *data = [self PNGRepresentationOfImage:newImage];
         NSString *docsDir;
         NSArray *dirPaths;
         
         dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         docsDir = [dirPaths objectAtIndex:0];
-        NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"foo.tiff"]];
+        NSString *databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"foo.png"]];
         [data writeToFile:databasePath atomically:NO];
     }
 }
@@ -47,6 +45,13 @@
     NSURL *fileURL = [NSURL fileURLWithPath: folderURL];
     [[NSWorkspace sharedWorkspace] openURL: fileURL];
 }
-
+- (NSData *) PNGRepresentationOfImage:(NSImage *) image {
+    // Create a bitmap representation from the current image
+    [image lockFocus];
+    NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc]initWithFocusedViewRect:NSMakeRect(0, 0, image.size.width,image.size.height)];
+    [image unlockFocus];
+    
+    return [bitmapRep representationUsingType:NSPNGFileType properties:Nil];
+}
 
 @end

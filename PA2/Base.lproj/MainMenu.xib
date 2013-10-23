@@ -731,8 +731,7 @@
             <connections>
                 <outlet property="convertGrayBtn" destination="Jux-1a-mTF" id="Jgb-aW-8F1"/>
                 <outlet property="dragAndDropView" destination="725-sE-FlD" id="cEp-7V-s5R"/>
-                <outlet property="imagView" destination="jbf-nG-hHE" id="4dr-Gk-cb6"/>
-                <outlet property="imageView" destination="jbf-nG-hHE" id="SEL-1H-9at"/>
+                <outlet property="imageView" destination="jbf-nG-hHE" id="jCq-3n-QF7"/>
                 <outlet property="picInfo" destination="99A-73-f29" id="ydG-Bm-iUe"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>

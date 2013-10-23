@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <QuartzCore/CoreImage.h>
 
 @interface PA2_ImageGrayConvert : NSObject
 
-+ (NSImage*)grayscale:(NSImage*)colorImage ;
+//jpg only
++ (NSImage *)Color2GrayScaleConvert:(NSImage *)srcImage;
 
+//second approach std
++ (NSImage *)Color2GrayScaleWithCustomeFilter:(NSImage *)srcImage;
 @end
